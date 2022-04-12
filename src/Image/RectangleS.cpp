@@ -24,7 +24,7 @@ RectangleS::~RectangleS(){
 
 void RectangleS::draw(CImage *img) {
     for(int i = 0; i < hauteur; i++){
-        Ligne *l= new Ligne(R,G,B, 0, x, y + i, x + longueur, y + i);
+        Ligne *l= new Ligne(R,G,B, transparence, x, y + i, x + longueur, y + i);
         l->draw(img);
         delete l;
     }

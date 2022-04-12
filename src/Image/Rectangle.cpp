@@ -26,25 +26,25 @@ Rectangle::~Rectangle(){
 
 void Rectangle::draw(CImage *img) {
     //Arrête gauche
-    Ligne *lg= new Ligne(R,G,B, 0, x, y, x, y + hauteur);
+    Ligne *lg= new Ligne(R,G,B, transparence, x, y, x, y + hauteur);
     lg->draw(img);
     delete lg;
     cout <<"Arrête gauche" << endl;
 
     //Arrête bas
-    Ligne *lb= new Ligne(R,G,B, 0, x, y, x + longueur, y);
+    Ligne *lb= new Ligne(R,G,B, transparence, x, y, x + longueur, y);
     lb->draw(img);
     delete lb;
     cout <<"Arrête bas" << endl;
 
     //Arrête haut
-    Ligne *lh= new Ligne(R,G,B, 0, x, y + hauteur, x + longueur, y + hauteur);
+    Ligne *lh= new Ligne(R,G,B, transparence, x, y + hauteur, x + longueur, y + hauteur);
     lh->draw(img);
     delete lh;
     cout <<"Arrête haut" << endl;
 
     //Arrête droite
-    Ligne *ld= new Ligne(R,G,B, 0, x + longueur, y, x + longueur, y + hauteur+1);
+    Ligne *ld= new Ligne(R,G,B, transparence, x + longueur, y, x + longueur, y + hauteur+1);
     ld->draw(img);
     delete ld;
     cout <<"Arrête droite" << endl;

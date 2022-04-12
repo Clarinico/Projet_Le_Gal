@@ -32,7 +32,7 @@ void Ligne::draw(CImage *img) {
     int nwr;
     int nwb;
     int nwg;
-    int transp = 75;
+    int transp = transparence;
     for(int i =0; i<n; i++) {
         CPixel *p = img->getPixel((int)(x + i*stepx), (int)(y + i*stepy)); 
         nwr = ((100- transp)*p->Red() + transp * R)/100;

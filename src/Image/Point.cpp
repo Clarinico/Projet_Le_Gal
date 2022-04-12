@@ -20,6 +20,13 @@ Point::~Point(){
 
 
 void Point::draw(CImage *img) {
+    int nwr;
+    int nwb;
+    int nwg;
+    int transp = transparence;
     CPixel *p = img->getPixel((int)(x), (int)(y)); 
-    p->RGB(R,G,B); 
+    nwr = ((100- transp)*p->Red() + transp * R)/100;
+    nwg = ((100- transp)*p->Green() + transp * G)/100;
+    nwb = ((100- transp)*p->Blue() + transp * B)/100;
+    p->RGB(nwr,nwg,nwb); 
 }
