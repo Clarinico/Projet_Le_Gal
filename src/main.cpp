@@ -30,8 +30,8 @@ int main(int argc, char * argv[]) {
     CImage   *img = new CImage(200, 200);*/
 
     //TEST TOUT
-    /*
-    CarreS *car = new CarreS(0,255,0,0, 100,50,10);
+    
+    /*CarreS *car = new CarreS(0,255,0,0, 100,50,10);
     car->draw(img);
     delete car; 
 
@@ -41,11 +41,11 @@ int main(int argc, char * argv[]) {
     delete rct;
 
 
-    Ligne *l1= new Ligne(5,255,100, 0, 0,0,199,199);
+    Ligne *l1= new Ligne(5,255,100, 50, 0,0,199,199);
     l1->draw(img);
     delete l1;
 
-    CercleS *c = new CercleS(70, 255, 70, 0, 100, 100, 40);
+    CercleS *c = new CercleS(5, 255, 100, 100, 100, 100, 40);
     c -> draw(img);
     delete c;
 
@@ -53,10 +53,10 @@ int main(int argc, char * argv[]) {
     pt -> draw(img);
     delete pt; */
 
-    /*
+    
     //Pikachu
 
-    CarreS *car1 = new CarreS(255,255,255,0,0,0,200);
+    /*CarreS *car1 = new CarreS(255,255,255,0,0,0,200);
     car1 -> draw(img);
     delete car1;
 
@@ -114,9 +114,8 @@ int main(int argc, char * argv[]) {
 
     RectangleS *rct4 = new RectangleS(255,0,255,0,90,25,10,20);
     rct4 -> draw(img);
-    delete rct4;
-    */
 
+    delete rct4;*/
 
     /*
     image->setImage( img );
