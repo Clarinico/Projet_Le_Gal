@@ -29,8 +29,15 @@ void Ligne::draw(CImage *img) {
     int n = fmax(deltax,deltay);
     double stepx = (double)(x2-x)/(n);
     double stepy = (double)(y2-y)/(n);
+    int nwr;
+    int nwb;
+    int nwg;
+    int transp = 75;
     for(int i =0; i<n; i++) {
         CPixel *p = img->getPixel((int)(x + i*stepx), (int)(y + i*stepy)); 
-        p->RGB(R,G,B); 
+        nwr = ((100- transp)*p->Red() + transp * R)/100;
+        nwg = ((100- transp)*p->Green() + transp * G)/100;
+        nwb = ((100- transp)*p->Blue() + transp * B)/100;
+        p->RGB(nwr,nwg,nwb); 
     } 
 }
