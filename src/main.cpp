@@ -16,17 +16,18 @@ using namespace std;
 #include "./Image/Point.h"
 #include "./Image/Cercle.h"
 #include "./Image/CercleS.h"
+#include "./Gestion_Fichier/Read_file.h"
 
 int main(int argc, char * argv[]) {
     cout << "(II) P_Bitmap exection start (" << __DATE__ << " - " << __TIME__ << ")" << endl;
     cout << "(II) + Number of arguments = " << argc << endl;
 
-    cout << "(II) CBitmap object creation" << endl;
+    /*cout << "(II) CBitmap object creation" << endl;
     CBitmap *image = new CBitmap();
     string filename2 = "Sortie.bmp";
 
     cout << "(II) CImage pointer extraction" << endl;
-    CImage   *img = new CImage(200, 200);
+    CImage   *img = new CImage(200, 200);*/
 
     //TEST TOUT
     /*
@@ -52,6 +53,7 @@ int main(int argc, char * argv[]) {
     pt -> draw(img);
     delete pt; */
 
+    /*
     //Pikachu
 
     CarreS *car1 = new CarreS(255,255,255,0,0,0,200);
@@ -113,11 +115,16 @@ int main(int argc, char * argv[]) {
     RectangleS *rct4 = new RectangleS(255,0,255,0,90,25,10,20);
     rct4 -> draw(img);
     delete rct4;
+    */
 
+
+    /*
     image->setImage( img );
 
     cout << "(II) CBitmap image saving" << endl;
-    image->SaveBMP(filename2);
+    image->SaveBMP(filename2); */
+
+    read_file("fichier_point.vec");
 
     return 1;
 }

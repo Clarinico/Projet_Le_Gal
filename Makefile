@@ -19,6 +19,7 @@ SRC=./src/Format/CBitmap.cpp   \
     ./src/Image/Point.cpp      \
 	./src/Image/Cercle.cpp     \
 	./src/Image/CercleS.cpp    \
+    ./src/Gestion_Fichier/Read_file.cpp    \
     ./src/main.cpp
 
 OBJ= $(SRC:.cpp=.o)
