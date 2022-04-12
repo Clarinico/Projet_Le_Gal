@@ -20,11 +20,18 @@ CercleS::~CercleS(){
 
 
 void CercleS::draw(CImage *img) {
+    int nwr;
+    int nwb;
+    int nwg;
+    int transp = transparence;
     for(int coord_x =x-rayon-1; coord_x<x+rayon+1; coord_x++) {
         for(int coord_y =y-rayon-1; coord_y<y+rayon+1; coord_y++) {
             if ((pow((coord_y-y), 2) + pow((coord_x-x), 2)) <= (rayon * rayon)) {
                 CPixel *p = img->getPixel(coord_x, coord_y); 
-                p->RGB(R,G,B); 
+                nwr = ((100- transp)*p->Red() + transp * R)/100;
+                nwg = ((100- transp)*p->Green() + transp * G)/100;
+                nwb = ((100- transp)*p->Blue() + transp * B)/100;
+                p->RGB(nwr,nwg,nwb); 
             } 
         }     
     }
