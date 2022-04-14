@@ -1,5 +1,6 @@
 #include "Read_file.h"
 #include <string>
+#include <vector> 
 
 using namespace std;
 
@@ -24,15 +25,29 @@ void read_file(string name){
         return;
     }
 
-    /* faire un while fichier pas fini*/
+    // créer un tableau de formes vide
+    vector<vector<Forme>> tableau_plan;
+    vector<vector<string>> tableau_type;
+
+    int pl;
+
+
+    /* fait un while fichier pas fini*/
     while (f.peek() != EOF){
         getline(f, line);
+
+        Forme *fig;
+
+        cout << "Creation Forme fig " << endl;
         
         istringstream iss( line );
         string instruction;
         getline( iss, instruction, ':' );
 
+        cout << "Lecture fichier" << endl;
+
         if (instruction.compare("[POINT ") ==0) {
+
 
             //récupération de X
             string coord_X;
@@ -59,25 +74,33 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
             //dessin
-
-            Point *pt = new Point(R, G, B, transparence,x,y);
-            pt -> draw(img);
-            delete pt;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
-
+            
+            fig = new Point(R, G, B, transparence,x,y);
+            tableau_type[pl].push_back("p");
         }
 
-        if (instruction.compare("[LIGNE ") ==0) {
+        else if (instruction.compare("[LIGNE ") ==0) {
 
             //récupération de X1
             string coord_X1;
@@ -114,25 +137,35 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
+
             //dessin
 
-            Ligne *l = new Ligne(R, G, B, transparence, x1, y1, x2, y2);
-            l -> draw(img);
-            delete l;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
+            fig = new Ligne(R, G, B, transparence, x1, y1, x2, y2);
+            tableau_type[pl].push_back("l");
 
         }
 
-        if (instruction.compare("[RECTANGLE ") ==0) {
+        else if (instruction.compare("[RECTANGLE ") ==0) {
 
             //récupération de X
             string coord_X;
@@ -169,25 +202,35 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
+
             //dessin
 
-            Rectangle *r = new Rectangle(R, G, B, transparence, x, y, HAUTEUR, LONGUEUR);
-            r -> draw(img);
-            delete r;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
+            fig = new Rectangle(R, G, B, transparence, x, y, HAUTEUR, LONGUEUR);
+            tableau_type[pl].push_back("r");
 
         }
 
-        if (instruction.compare("[RECTANGLES ") ==0) {
+        else if (instruction.compare("[RECTANGLES ") ==0) {
 
             //récupération de X
             string coord_X;
@@ -224,25 +267,34 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
+
             //dessin
 
-            RectangleS *r = new RectangleS(R, G, B, transparence, x, y, HAUTEUR, LONGUEUR);
-            r -> draw(img);
-            delete r;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
-
+            fig = new RectangleS(R, G, B, transparence, x, y, HAUTEUR, LONGUEUR);
+            tableau_type[pl].push_back("rs");
         }
 
-        if (instruction.compare("[CARRE ") ==0) {
+        else if (instruction.compare("[CARRE ") ==0) {
 
             //récupération de X
             string coord_X;
@@ -274,25 +326,35 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
+
             //dessin
 
-            Carre *car = new Carre(R, G, B, transparence, x, y, HAUTEUR);
-            car -> draw(img);
-            delete car;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
+            fig = new Carre(R, G, B, transparence, x, y, HAUTEUR);
+            tableau_type[pl].push_back("ca");
 
         }
 
-        if (instruction.compare("[CARRES ") ==0) {
+        else if (instruction.compare("[CARRES ") ==0) {
 
             //récupération de X
             string coord_X;
@@ -324,25 +386,35 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
+
             //dessin
 
-            CarreS *car = new CarreS(R, G, B, transparence, x, y, HAUTEUR);
-            car -> draw(img);
-            delete car;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
+            fig = new CarreS(R, G, B, transparence, x, y, HAUTEUR);
+            tableau_type[pl].push_back("cas");
 
         }
 
-        if (instruction.compare("[CERCLE ") ==0) {
+        else if (instruction.compare("[CERCLE ") ==0) {
 
             //récupération de X
             string coord_X;
@@ -374,26 +446,36 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
+
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
 
             //dessin
             
 
-            Cercle *cerc = new Cercle(R, G, B, transparence, x, y, RAYON);
-            cerc-> draw(img);
-            delete cerc;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
+            fig = new Cercle(R, G, B, transparence, x, y, RAYON);
+            tableau_type[pl].push_back("ce");
 
         }
 
-        if (instruction.compare("[CERCLES ") ==0) {
+        else if (instruction.compare("[CERCLES ") ==0) {
 
             //récupération de X
             string coord_X;
@@ -425,26 +507,56 @@ void read_file(string name){
             getline( iss, BLUE, ',' );
             int B;
             istringstream(BLUE) >> B;
-            //récupération de transparence
+
+            //récupération de transparence et de plan
+            string trans_plan;
+            getline( iss, trans_plan, ';' );
+            istringstream isss(trans_plan);
+
             string trans;
-            getline( iss, trans, ';' );
+            getline(isss,trans,',');
             int transparence;
             istringstream(trans) >> transparence;
 
+            string plan;
+            getline(isss,plan,';');
+            if (plan.empty()) {
+                pl=0;
+            }
+            else {
+                istringstream(plan) >> pl;
+            }
+            
+
             //dessin
 
-            CercleS *cerc = new CercleS(R, G, B, transparence, x, y, RAYON);
-            cerc-> draw(img);
-            delete cerc;
-            image->setImage( img );
-
-            cout << "(II) CBitmap image saving" << endl;
-            image->SaveBMP(filename2);
+            fig = new CercleS(R, G, B, transparence, x, y, RAYON);
+            tableau_type[pl].push_back("ces");
         }
+
+        //Remplissage du tableau avec les figures
+        tableau_plan[pl].push_back(*fig);
+
+
         //elimination de ]
         string crochet;
         getline(iss,crochet);
-
+        
     }
+
+    //dessin
+        for (int i=0; i=tableau_plan.size(); i++){
+            for (int j=0; j=tableau_plan[i].size(); j++) {
+                if(tableau_type[i][j].compare("p")){}
+                tableau_plan[i][j].draw(img);
+                delete &tableau_plan[i][j];
+                image->setImage( img );
+            }
+        }   //CREER UN TABLEAU PAR TYPE
+    
+    cout << "(II) CBitmap image saving" << endl;
+    image->SaveBMP(filename2);
+    
+    
 
 };
