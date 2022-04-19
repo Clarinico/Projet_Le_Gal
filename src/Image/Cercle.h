@@ -17,7 +17,7 @@ class Cercle : public Forme{
 
     //Méthodes
     Cercle();
-    Cercle(int _R, int _G, int _B, int _transparence, int _x, int _y, int _rayon);
+    Cercle(int _R, int _G, int _B, int _transparence, int _x, int _y, int _rayon, int _z);
     ~Cercle();
     void draw(CImage *image);
 };

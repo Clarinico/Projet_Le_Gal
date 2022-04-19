@@ -22,6 +22,8 @@ int main(int argc, char * argv[]) {
     cout << "(II) P_Bitmap exection start (" << __DATE__ << " - " << __TIME__ << ")" << endl;
     cout << "(II) + Number of arguments = " << argc << endl;
 
+
+
     /*cout << "(II) CBitmap object creation" << endl;
     CBitmap *image = new CBitmap();
     string filename2 = "Sortie.bmp";
@@ -53,77 +55,7 @@ int main(int argc, char * argv[]) {
     pt -> draw(img);
     delete pt; */
 
-    
-    //Pikachu
-
-    /*CarreS *car1 = new CarreS(255,255,255,0,0,0,200);
-    car1 -> draw(img);
-    delete car1;
-
-    CarreS *car2 = new CarreS(255,255,0,0,50,10,100);
-    car2 -> draw(img);
-    delete car2;
-
-    //OREILLES
-    RectangleS *rct1 = new RectangleS(255,255,0,0,50,110,70,20);
-    rct1 -> draw(img);
-    delete rct1;
-
-    RectangleS *rct2 = new RectangleS(255,255,0,0,130,110,70,20);
-    rct2 -> draw(img);
-    delete rct2;
-
-    CarreS *car3 = new CarreS(0,0,0,0,50,160,20);
-    car3 -> draw(img);
-    delete car3;
-
-    CarreS *car4 = new CarreS(0,0,0,0,130,160,20);
-    car4 -> draw(img);
-    delete car4;
-
-    //JOUES
-    CarreS *car5 = new CarreS(255,0,0,0,55,55,10);
-    car5 -> draw(img);
-    delete car5;
-
-    CarreS *car6 = new CarreS(255,0,0,0,135,55,10);
-    car6 -> draw(img);
-    delete car6;
-
-    //YEUX
-    CarreS *car7 = new CarreS(0,0,0,0,65,80,20);
-    car7 -> draw(img);
-    delete car7;
-
-    CarreS *car8 = new CarreS(0,0,0,0,115,80,20);
-    car8 -> draw(img);
-    delete car8;
-
-    CarreS *car9 = new CarreS(255,255,255,0,65,80,10);
-    car9 -> draw(img);
-    delete car9;
-
-    CarreS *car10 = new CarreS(255,255,255,0,115,80,10);
-    car10 -> draw(img);
-    delete car10;
-
-    //BOUCHE
-    RectangleS *rct3 = new RectangleS(255,0,0,0,80,25,20,40);
-    rct3 -> draw(img);
-    delete rct3;
-
-    RectangleS *rct4 = new RectangleS(255,0,255,0,90,25,10,20);
-    rct4 -> draw(img);
-
-    delete rct4;*/
-
-    /*
-    image->setImage( img );
-
-    cout << "(II) CBitmap image saving" << endl;
-    image->SaveBMP(filename2); */
-
-    read_file("fichier_point.vec");
+    read_file(argv[1], argv[2], atoi(argv[3]));
 
     return 1;
 }

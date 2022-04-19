@@ -5,14 +5,7 @@
 using namespace std;
 
 
-void read_file(string name){
-
-    cout << "(II) CBitmap object creation" << endl;
-    CBitmap *image = new CBitmap();
-    string filename2 = "Sortie.bmp";
-
-    cout << "(II) CImage pointer extraction" << endl;
-    CImage   *img = new CImage(200, 200);
+void read_file(string name, string endname, int scale){
 
     ifstream f;
     string line;
@@ -26,13 +19,15 @@ void read_file(string name){
     }
 
     // créer un tableau de formes vide
-    vector<vector<Forme>> tableau_plan;
-    vector<vector<string>> tableau_type;
+    priority_queue<Forme*, vector<Forme*>, PrioritizeTasks> tableau_plan;
 
     int pl;
+    int max; //Coord du pixel le plus éloigné de (0;0)
 
 
     /* fait un while fichier pas fini*/
+    
+    int nline = 0;
     while (f.peek() != EOF){
         getline(f, line);
 
@@ -44,7 +39,7 @@ void read_file(string name){
         string instruction;
         getline( iss, instruction, ':' );
 
-        cout << "Lecture fichier" << endl;
+        cout << "LINE " << nline++ << " [" << line << "]" << endl;
 
         if (instruction.compare("[POINT ") ==0) {
 
@@ -95,9 +90,12 @@ void read_file(string name){
             }
             
             //dessin
-            
-            fig = new Point(R, G, B, transparence,x,y);
-            tableau_type[pl].push_back("p");
+            fig = new Point(R, G, B, transparence,x*scale,y*scale,pl);
+
+            //Calcul de max
+            max=(max < x*scale)?(x*scale):max;
+            max=(max < y*scale)?(y*scale):max;
+
         }
 
         else if (instruction.compare("[LIGNE ") ==0) {
@@ -159,9 +157,13 @@ void read_file(string name){
             
 
             //dessin
+            fig = new Ligne(R, G, B, transparence, x1*scale, y1*scale, x2*scale, y2*scale,pl);
 
-            fig = new Ligne(R, G, B, transparence, x1, y1, x2, y2);
-            tableau_type[pl].push_back("l");
+            //Calcul de max
+            max=(max < x1*scale)?(x1*scale):max;
+            max=(max < y1*scale)?(y1*scale):max;
+            max=(max < x2*scale)?(x2*scale):max;
+            max=(max < y2*scale)?(y2*scale):max;
 
         }
 
@@ -225,8 +227,11 @@ void read_file(string name){
 
             //dessin
 
-            fig = new Rectangle(R, G, B, transparence, x, y, HAUTEUR, LONGUEUR);
-            tableau_type[pl].push_back("r");
+            fig = new Rectangle(R, G, B, transparence, x*scale, y*scale, HAUTEUR*scale, LONGUEUR*scale, pl);
+
+            //Calcul de max
+            max=(max < x*scale + HAUTEUR*scale)?(x*scale+HAUTEUR*scale):max;
+            max=(max < y*scale+LONGUEUR*scale)?(y*scale+LONGUEUR*scale):max;
 
         }
 
@@ -290,8 +295,12 @@ void read_file(string name){
 
             //dessin
 
-            fig = new RectangleS(R, G, B, transparence, x, y, HAUTEUR, LONGUEUR);
-            tableau_type[pl].push_back("rs");
+            fig = new RectangleS(R, G, B, transparence, x*scale, y*scale, HAUTEUR*scale, LONGUEUR*scale, pl);
+
+            //Calcul de max
+            max=(max < x*scale + HAUTEUR*scale)?(x*scale+HAUTEUR*scale):max;
+            max=(max < y*scale+LONGUEUR*scale)?(y*scale+LONGUEUR*scale):max;
+
         }
 
         else if (instruction.compare("[CARRE ") ==0) {
@@ -349,8 +358,11 @@ void read_file(string name){
 
             //dessin
 
-            fig = new Carre(R, G, B, transparence, x, y, HAUTEUR);
-            tableau_type[pl].push_back("ca");
+            fig = new Carre(R, G, B, transparence, x*scale, y*scale, HAUTEUR*scale, pl);
+
+            //Calcul de max
+            max=(max < x*scale + HAUTEUR*scale)?(x*scale+HAUTEUR*scale):max;
+            max=(max < y*scale + HAUTEUR*scale)?(y*scale+HAUTEUR*scale):max;
 
         }
 
@@ -409,8 +421,11 @@ void read_file(string name){
 
             //dessin
 
-            fig = new CarreS(R, G, B, transparence, x, y, HAUTEUR);
-            tableau_type[pl].push_back("cas");
+            fig = new CarreS(R, G, B, transparence, x*scale, y*scale, HAUTEUR*scale, pl);
+
+            //Calcul de max
+            max=(max < x*scale + HAUTEUR*scale)?(x*scale+HAUTEUR*scale):max;
+            max=(max < y*scale + HAUTEUR*scale)?(y*scale+HAUTEUR*scale):max;
 
         }
 
@@ -470,8 +485,11 @@ void read_file(string name){
             //dessin
             
 
-            fig = new Cercle(R, G, B, transparence, x, y, RAYON);
-            tableau_type[pl].push_back("ce");
+            fig = new Cercle(R, G, B, transparence, x*scale, y*scale, RAYON*scale, pl);
+
+            //Calcul de max
+            max=(max < x*scale + RAYON*scale)?(x*scale+RAYON*scale):max;
+            max=(max < y*scale + RAYON*scale)?(y*scale+RAYON*scale):max;
 
         }
 
@@ -530,13 +548,18 @@ void read_file(string name){
 
             //dessin
 
-            fig = new CercleS(R, G, B, transparence, x, y, RAYON);
-            tableau_type[pl].push_back("ces");
+            fig = new CercleS(R, G, B, transparence, x*scale, y*scale, RAYON*scale, pl);
+
+            //Calcul de max
+            max=(max < x*scale + RAYON*scale)?(x*scale+RAYON*scale):max;
+            max=(max < y*scale + RAYON*scale)?(y*scale+RAYON*scale):max;
         }
 
         //Remplissage du tableau avec les figures
-        tableau_plan[pl].push_back(*fig);
-
+        cout << "stockage" << endl;
+        tableau_plan.push(fig);
+//        cout << fig << endl;
+        cout << "stockage fin" << endl;
 
         //elimination de ]
         string crochet;
@@ -544,15 +567,27 @@ void read_file(string name){
         
     }
 
+    cout << "sortie boucle while" << endl;
+    
+    cout << "(II) CBitmap object creation" << endl;
+    CBitmap *image = new CBitmap();
+    string filename2 = endname;
+
+    cout << "(II) CImage pointer extraction" << endl;
+    CImage   *img = new CImage(max, max);
+
     //dessin
-        for (int i=0; i=tableau_plan.size(); i++){
-            for (int j=0; j=tableau_plan[i].size(); j++) {
-                if(tableau_type[i][j].compare("p")){}
-                tableau_plan[i][j].draw(img);
-                delete &tableau_plan[i][j];
-                image->setImage( img );
-            }
-        }   //CREER UN TABLEAU PAR TYPE
+    int taille = tableau_plan.size();
+        for (int i=0; i<taille; i++){
+            cout << "BOUCLE FOR " << i << " ENTREE" << endl;
+            //for (int j=0; j=tableau_plan[i].size(); j++) {
+            cout << tableau_plan.top() << endl;
+            tableau_plan.top()->draw(img);
+            delete tableau_plan.top();
+            tableau_plan.pop();
+            image->setImage( img );
+            //}
+        }
     
     cout << "(II) CBitmap image saving" << endl;
     image->SaveBMP(filename2);

@@ -11,6 +11,7 @@ using namespace std;
 
 class Forme{
     public :
+    friend class PrioritizeTasks;
     //Attributs
     int R;
     int G;
@@ -18,10 +19,11 @@ class Forme{
     int transparence;
     int x;
     int y;
+    int z;
 
     //Méthodes
     Forme();
-    Forme(int R, int G, int B, int _transparence, int _x, int _y);
+    Forme(int R, int G, int B, int _transparence, int _x, int _y, int _z);
     ~Forme();
     virtual void draw(CImage *image)=0;
 };

@@ -10,8 +10,8 @@ Carre::Carre()
     
 }
 
-Carre::Carre(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur)
-    :Rectangle(_R, _G, _B, _transparence, _x, _y, _hauteur, _hauteur)
+Carre::Carre(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _z)
+    :Rectangle(_R, _G, _B, _transparence, _x, _y, _hauteur, _hauteur, _z)
 {
 
 }

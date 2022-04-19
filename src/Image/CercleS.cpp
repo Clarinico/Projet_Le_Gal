@@ -8,8 +8,8 @@ CercleS::CercleS()
 {
 }
 
-CercleS::CercleS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _rayon)
-    :Cercle(_R, _G, _B, _transparence, _x, _y, _rayon)
+CercleS::CercleS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _rayon, int _z)
+    :Cercle(_R, _G, _B, _transparence, _x, _y, _rayon, _z)
 {
 }
 

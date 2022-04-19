@@ -18,7 +18,7 @@ class Ligne : public Forme{
 
     //Méthodes
     Ligne();
-    Ligne(int _R, int _G, int _B, int _transparence, int _x, int _y, int _x2, int _y2);
+    Ligne(int _R, int _G, int _B, int _transparence, int _x, int _y, int _x2, int _y2, int _z);
     ~Ligne();
     void draw(CImage *image);
 };

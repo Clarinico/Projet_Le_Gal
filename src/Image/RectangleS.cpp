@@ -10,8 +10,8 @@ RectangleS::RectangleS()
     
 }
 
-RectangleS::RectangleS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _longueur)
-    :Rectangle(_R, _G, _B, _transparence, _x, _y, _hauteur, _longueur)
+RectangleS::RectangleS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _longueur, int _z)
+    :Rectangle(_R, _G, _B, _transparence, _x, _y, _hauteur, _longueur, _z)
 {
 
 }
@@ -24,7 +24,7 @@ RectangleS::~RectangleS(){
 
 void RectangleS::draw(CImage *img) {
     for(int i = 0; i < hauteur; i++){
-        Ligne *l= new Ligne(R,G,B, transparence, x, y + i, x + longueur, y + i);
+        Ligne *l= new Ligne(R,G,B, transparence, x, y + i, x + longueur, y + i, z);
         l->draw(img);
         delete l;
     }

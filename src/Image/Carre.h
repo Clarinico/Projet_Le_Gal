@@ -16,7 +16,7 @@ class Carre : public Rectangle{
 
     //Méthodes
     Carre();
-    Carre(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur);
+    Carre(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _z);
     ~Carre();
     void draw(CImage *image);
 };

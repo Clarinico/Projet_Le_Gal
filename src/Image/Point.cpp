@@ -8,8 +8,8 @@ Point::Point()
 {
 }
 
-Point::Point(int _R, int _G, int _B, int _transparence, int _x, int _y)
-    :Forme(_R, _G, _B, _transparence, _x, _y)
+Point::Point(int _R, int _G, int _B, int _transparence, int _x, int _y, int _z)
+    :Forme(_R, _G, _B, _transparence, _x, _y, _z)
 {
 }
 

@@ -16,7 +16,7 @@ class Point : public Forme{
 
     //Méthodes
     Point();
-    Point(int _R, int _G, int _B, int _transparence, int _x, int _y);
+    Point(int _R, int _G, int _B, int _transparence, int _x, int _y, int _z);
     ~Point();
     void draw(CImage *image);
 };

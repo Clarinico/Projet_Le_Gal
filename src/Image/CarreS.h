@@ -16,7 +16,7 @@ class CarreS : public RectangleS{
 
     //Méthodes
     CarreS();
-    CarreS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur);
+    CarreS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _z);
     ~CarreS();
     void draw(CImage *image);
 };

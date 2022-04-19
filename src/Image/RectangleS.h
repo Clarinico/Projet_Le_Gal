@@ -17,7 +17,7 @@ class RectangleS : public Rectangle{
 
     //Méthodes
     RectangleS();
-    RectangleS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _longueur);
+    RectangleS(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _longueur, int _z);
     ~RectangleS();
     void draw(CImage *image);
 };

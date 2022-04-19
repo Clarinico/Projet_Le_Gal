@@ -10,8 +10,8 @@ Ligne::Ligne()
     y2 = 0;
 }
 
-Ligne::Ligne(int _R, int _G, int _B, int _transparence, int _x, int _y, int _x2, int _y2)
-    :Forme(_R, _G, _B, _transparence, _x, _y)
+Ligne::Ligne(int _R, int _G, int _B, int _transparence, int _x, int _y, int _x2, int _y2, int _z)
+    :Forme(_R, _G, _B, _transparence, _x, _y, _z)
 {
    x2 =_x2;
    y2 = _y2;

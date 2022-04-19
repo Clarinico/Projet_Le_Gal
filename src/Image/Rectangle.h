@@ -18,7 +18,7 @@ class Rectangle : public Forme{
 
     //Méthodes
     Rectangle();
-    Rectangle(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _longueur);
+    Rectangle(int _R, int _G, int _B, int _transparence, int _x, int _y, int _hauteur, int _longueur, int _z);
     ~Rectangle();
     void draw(CImage *image);
 };

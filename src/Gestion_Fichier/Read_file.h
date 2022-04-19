@@ -3,7 +3,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include<sstream>
+#include <sstream>
+#include <queue>
 
 #include "../Image/Ligne.h"
 #include "../Image/Forme.h"
@@ -22,7 +23,13 @@ using namespace std;
 #ifndef READ_FILE_H_
 #define READ_FILE_H_
 
-void read_file(string name);
+void read_file(string name,string endname, int scale);
 
+class PrioritizeTasks {
+    public :
+    int operator()(const Forme* x, const Forme* y ){
+        return x->z > y->z;    
+    }
+};
 
 #endif /*READ_FILE_H_*/

@@ -9,8 +9,8 @@ Cercle::Cercle()
     rayon = 0;
 }
 
-Cercle::Cercle(int _R, int _G, int _B, int _transparence, int _x, int _y, int _rayon)
-    :Forme(_R, _G, _B, _transparence, _x, _y)
+Cercle::Cercle(int _R, int _G, int _B, int _transparence, int _x, int _y, int _rayon, int _z)
+    :Forme(_R, _G, _B, _transparence, _x, _y, _z)
 {
    rayon =_rayon;
 }
